@@ -1,0 +1,27 @@
+@import "colors";
+@import "base";
+.container {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  max-width: 200px;
+  border-radius: 8px;
+  background-color: $card-background;
+  padding: 4px;
+}
+
+.separator {
+  height: 100%;
+  margin: 0 8px;
+  border: 1px solid $text-secondary;
+}
+
+.label {
+  color: $text-secondary;
+  @extend .body-text;
+}
+
+.value {
+  color: $text-primary;
+  @extend .small-text;
+}
