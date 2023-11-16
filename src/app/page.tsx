@@ -1,10 +1,11 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import {useState} from 'react';
+import styles from './page.module.scss'
+import HomeLayout from '@/components/layouts/home/HomeLayout';
 
-export default function Home() {
+export default function Home() {  
   return (
     <main>
-      <div>Page Home</div>
+      <HomeLayout/>
     </main>
   )
 }
