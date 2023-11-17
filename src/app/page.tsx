@@ -1,11 +1,9 @@
-import {useState} from 'react';
-import styles from './page.module.scss'
-import HomeLayout from '@/components/layouts/home/HomeLayout';
+import HomeLayout from "@/components/layouts/home/HomeLayout";
 
-export default function Home() {  
+export default function Home() {
   return (
     <main>
-      <HomeLayout/>
+      <HomeLayout />
     </main>
-  )
+  );
 }
