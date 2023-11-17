@@ -7,7 +7,7 @@ type Props = {
   onBlur(): void;
 };
 const CustomInput = ({ value, onChange, placeholder, onBlur }: Props) => {
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
   return (
