@@ -3,20 +3,23 @@ import styles from './CustomInput.module.scss';
 type Props = {
   value: string;
   onChange(value: string): void;
-  placeholder: string;
+  placeholder?: string;
+  onBlur(): void;
 };
-const CustomInput = ({ value, onChange, placeholder }: Props) => {
-  const handleOnChange = (e) => {
+const CustomInput = ({ value, onChange, placeholder, onBlur }: Props) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
   return (
     <span className={styles.container}>
-      <Image alt="Search" width={20} height={20} src={"./svg/Search.svg"} />
+      <Image alt="Search" width={20} height={20} src={"./images/svg/Search.svg"} />
       <input
+        className={styles.input}
         type="input"
         placeholder={placeholder || "username"}
         value={value}
         onChange={handleOnChange}
+        onBlur={onBlur}
       />
     </span>
   );

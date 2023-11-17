@@ -12,6 +12,29 @@
   justify-content: space-between;
 }
 
+.text-align-center {
+  text-align: center;
+}
+
 .mt-10 {
   margin-top: 10px;
+}
+.mh-10 {
+  margin: 0 10px;
+}
+
+.large-text {
+  font-size: 32px;
+}
+
+.title-text {
+  font-size: 20px;
+}
+
+.body-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
 }

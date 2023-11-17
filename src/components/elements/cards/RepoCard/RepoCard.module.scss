@@ -1,0 +1,26 @@
+@import "base";
+@import "colors";
+.container {
+  width: 100%;
+  min-height: 200px;
+  padding: 0 12px;
+  background-image: linear-gradient(
+    to right bottom,
+    #000,
+    $light-card-background
+  );
+  border-radius: 8px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.name-text{
+  @extend .title-text;
+  color: $text-primary;
+}
+.description-text{
+  @extend .body-text;
+  color: $text-secondary;
+  margin-left: 8px;
+}
