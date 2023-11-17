@@ -4,9 +4,11 @@ import styles from "./RepoCard.module.scss";
 import { formatRelativeDate } from "@/utils/formatRelativeDate";
 type Props = {
   repo: RepoI;
+  onClick(): void;
 }
 const RepoCard = ({
-  repo
+  repo,
+  onClick
 }: Props) => {
   const {  name,
     description,
@@ -16,7 +18,7 @@ const RepoCard = ({
     updated_at} = repo;
   const formattedDate = formatRelativeDate(updated_at);
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={onClick}>
       <h4 className={styles['name-text']}>{name}</h4>
       <p className={styles['description-text']}>{description}</p>
       <div className={`${styles.flex} ${styles.row}`}>

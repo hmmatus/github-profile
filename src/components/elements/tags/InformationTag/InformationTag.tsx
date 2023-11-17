@@ -1,7 +1,7 @@
 import styles from './InformationTag.module.scss';
 type Props = {
   label: string;
-  value: string;
+  value: string | number;
 }
 const InformationTag = ({label, value}: Props) => {
   return (

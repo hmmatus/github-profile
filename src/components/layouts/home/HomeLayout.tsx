@@ -5,15 +5,25 @@ import styles from "./HomeLayout.module.scss";
 import InformationTag from "@/components/elements/tags/InformationTag/InformationTag";
 import { getProfile, getRepos } from "@/api/profile";
 import RepoCard from "@/components/elements/cards/RepoCard/RepoCard";
+import { UserI } from "@/models/user.model";
+import { RepoI } from "@/models/repo.model";
 
 const HomeLayout = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [profile, setProfile] = useState({});
-  const [repos, setRepos] = useState([]);
+  const [profile, setProfile] = useState<UserI | {}>({});
+  const [repos, setRepos] = useState<RepoI[] | []>([]);
+  const [selectedRepos, setSelectedRepos] = useState<RepoI[] | []>([]);
+  const [showAll, setShowAll] = useState(false);
   const onChangeSearchValue = (value: string) => {
     setSearchValue(value);
   };
   const [loading, setLoading] = useState(false);
+
+  function handleSearch () {
+    if (!!searchValue) {
+      handleFetch(searchValue);
+    }
+  }
 
   async function fetchProfile(name: string) {
     try {
@@ -30,18 +40,33 @@ const HomeLayout = () => {
     try {
       const data = await getRepos(name);
       setRepos(data);
+      setSelectedRepos(data.slice(0, 4));
     } catch (error) {
       console.log("🚀 ~ file: HomeLayout.tsx:30 ~ fetchRepos ~ error:", error);
     }
   }
 
+  async function handleFetch(name: string) {
+    setLoading(true);
+    await Promise.all([fetchProfile(name), fetchRepos(name)]);
+    setLoading(false);
+  };
+
+  function handleSeeAll() {
+    if (showAll) {
+      setSelectedRepos([...repos]);
+    } else {
+      setSelectedRepos([...repos.slice(0, 4)]);
+    }
+    setShowAll(!showAll);
+  };
+
+  function handleOpenNav(url: string) {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
   useEffect(() => {
-    const handleFetch = async () => {
-      setLoading(true);
-      await Promise.all([fetchProfile("github"), fetchRepos("github")]);
-      setLoading(false);
-    };
-    handleFetch();
+    handleFetch("github");
   }, []);
 
   if (loading) {
@@ -52,38 +77,40 @@ const HomeLayout = () => {
     )
   }
 
+  const {avatar_url, followers, following, location, name, bio} = profile as UserI;
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <CustomInput value={searchValue} onChange={onChangeSearchValue} />
+        <CustomInput value={searchValue} onChange={onChangeSearchValue} onBlur={handleSearch}/>
       </div>
       <div className={styles["profile-header"]}>
         <div className={styles["image-container"]}>
           <img
-            src={profile.avatar_url}
+            src={avatar_url}
             className={styles["profile-img"]}
             alt="Profile Image"
           />
         </div>
         <div className={styles["tags-container"]}>
           <div className={styles.tags}>
-            <InformationTag label="Followers" value={profile.followers} />
-            <InformationTag label="Following" value={profile.following} />
-            <InformationTag label="Location" value={profile.location} />
+            <InformationTag label="Followers" value={followers} />
+            <InformationTag label="Following" value={following} />
+            <InformationTag label="Location" value={location} />
           </div>
         </div>
       </div>
       <div className={styles["bio-container"]}>
-        <h1>{profile.name}</h1>
-        <p>{profile.bio}</p>
+        <h1>{name}</h1>
+        <p>{bio}</p>
       </div>
       <div className={styles["repo-container"]}>
-        {repos.slice(0,3).map((elto, index) => (
-          <RepoCard repo={elto} key={index} />
+        {selectedRepos.map((elto, index) => (
+          <RepoCard repo={elto} key={index} onClick={() => handleOpenNav(elto.html_url)} />
         ))}
       </div>
       <section>
-        <p>View all repositories</p>
+        <p onClick={handleSeeAll} className={styles['footer-text']}>{`${ showAll ? 'View less Repositories' : 'View all repositories'}`}</p>
       </section>
     </div>
   );

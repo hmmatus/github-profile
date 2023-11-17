@@ -4,8 +4,9 @@ type Props = {
   value: string;
   onChange(value: string): void;
   placeholder?: string;
+  onBlur(): void;
 };
-const CustomInput = ({ value, onChange, placeholder }: Props) => {
+const CustomInput = ({ value, onChange, placeholder, onBlur }: Props) => {
   const handleOnChange = (e) => {
     onChange(e.target.value);
   };
@@ -18,6 +19,7 @@ const CustomInput = ({ value, onChange, placeholder }: Props) => {
         placeholder={placeholder || "username"}
         value={value}
         onChange={handleOnChange}
+        onBlur={onBlur}
       />
     </span>
   );
