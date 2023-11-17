@@ -33,7 +33,7 @@ const RepoCard = ({
           <p className={`${styles['text-align-center']} ${styles['description-text']}`}>{forks}</p>
         </div>
         <div className={`${styles.flex} ${styles.ai} ${styles.jc}`}>
-          <Image width={30} height={30} alt="Forks" src={"/images/svg/star.svg"} />
+          <Image width={30} height={30} alt="Star" src={"/images/svg/star.svg"} />
           <p className={styles['description-text']}>{watchers}</p>
         </div>
         <p className={styles['description-text']}>{formattedDate}</p>
