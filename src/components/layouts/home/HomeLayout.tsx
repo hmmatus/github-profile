@@ -7,6 +7,7 @@ import { getProfile, getRepos } from "@/api/profile";
 import RepoCard from "@/components/elements/cards/RepoCard/RepoCard";
 import { UserI } from "@/models/user.model";
 import { RepoI } from "@/models/repo.model";
+import HomeSkeleton from "./HomeSkeleton";
 
 const HomeLayout = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -53,7 +54,7 @@ const HomeLayout = () => {
   };
 
   function handleSeeAll() {
-    if (showAll) {
+    if (!showAll) {
       setSelectedRepos([...repos]);
     } else {
       setSelectedRepos([...repos.slice(0, 4)]);
@@ -71,13 +72,12 @@ const HomeLayout = () => {
 
   if (loading) {
     return (
-      <div className={styles.contianer}>
-        <h1>Loading</h1>
-      </div>
+      <HomeSkeleton />
     )
   }
 
   const {avatar_url, followers, following, location, name, bio} = profile as UserI;
+
 
   return (
     <div className={styles.container}>
