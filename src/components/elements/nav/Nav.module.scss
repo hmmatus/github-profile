@@ -1,0 +1,9 @@
+.nav {
+  width: 100vw;
+  height: min(200px, 40vh);
+  background-image: url('/images/background.png');
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+}

@@ -19,7 +19,7 @@ const RepoCard = ({
   const formattedDate = formatRelativeDate(updated_at);
   return (
     <div className={styles.container} onClick={onClick}>
-      <h4 className={styles['name-text']}>{name}</h4>
+      <h2 className={styles['name-text']}>{name}</h2>
       <p className={styles['description-text']}>{description}</p>
       <div className={`${styles.flex} ${styles.row}`}>
         {license && (
