@@ -1,6 +1,69 @@
+@import "colors";
+@import "base";
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100vw;
   height: 100vh;
+}
+
+.body {
+  width: 80%;
+}
+
+.profile-container {
+  display: flex;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.profile-img {
+  border: 8px solid $primary-background;
+  border-radius: 8px;
+  transform: translate(0, -50%);
+  @media (min-width: 720px) {
+    transform: translate(0, -20%);
+  }
+}
+
+.tags-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+
+  @media (min-width: 720px) {
+    flex-direction: row;
+  }
+}
+
+.bio-container {
+  h1 {
+    margin: 0;
+    @extend .large-text;
+  }
+  p {
+    @extend .title-text;
+  }
+}
+
+.repo-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  @media (min-width: 720px) {
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+  }
 }

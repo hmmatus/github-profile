@@ -10,7 +10,6 @@ type Props = {
 };
 
 const UserCard = ({ user, loading, onPress }: Props) => {
-  console.log("🚀 ~ file: UserCard.tsx:12 ~ UserCard ~ user:", user)
   if (loading) {
     return (
       <div className={styles["search-card"]}>

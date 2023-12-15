@@ -4,6 +4,7 @@ import { getProfile } from "@/api/profile";
 import { useEffect, useState } from "react";
 import UserCard from "../../cards/UserCard/UserCard";
 import { UserI } from "@/models/user.model";
+import { useUserContext } from "@/context/Context";
 type Props = {
   placeholder?: string;
   
@@ -16,6 +17,7 @@ const SearchUserInput = ({ placeholder }: Props) => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
+  const {updateUser} = useUserContext();
   async function onBlur() {
     setLoading(true);
     try {
@@ -29,7 +31,8 @@ const SearchUserInput = ({ placeholder }: Props) => {
     }
   }
   function onPressCard (user: UserI) {
-    console.log(user)
+    updateUser(user);
+    setShowCard(false);
   }
   return (
     <section className={styles.container}>
