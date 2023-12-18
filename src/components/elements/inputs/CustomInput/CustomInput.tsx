@@ -31,7 +31,9 @@ const SearchUserInput = ({ placeholder }: Props) => {
     }
   }
   function onPressCard (user: UserI) {
-    updateUser(user);
+    if (user) {
+      updateUser(user);
+    }
     setShowCard(false);
   }
   return (

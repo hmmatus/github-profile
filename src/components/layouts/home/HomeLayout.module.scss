@@ -10,6 +10,9 @@
 
 .body {
   width: 80%;
+  @media (min-width: 1280px) {
+    width: 60%;
+  }
 }
 
 .profile-container {
