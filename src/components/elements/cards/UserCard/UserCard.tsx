@@ -6,7 +6,7 @@ import { UserI } from "@/models/user.model";
 type Props = {
   user: UserI | null;
   loading: boolean;
-  onPress(user: UserI): void;
+  onPress(user: UserI | boolean): void;
 };
 
 const UserCard = ({ user, loading, onPress }: Props) => {
@@ -20,7 +20,7 @@ const UserCard = ({ user, loading, onPress }: Props) => {
 
   if (!user) {
     return (
-      <div className={styles["search-card"]}>
+      <div className={styles["search-card"]} onClick={() => onPress(false)}>
         <h2>No results</h2>
       </div>
     );
