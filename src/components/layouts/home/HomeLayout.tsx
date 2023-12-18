@@ -67,7 +67,7 @@ const HomeLayout = () => {
     const currentUser = user;
     const prevUser = prevUserRef.current;
     if (prevUser !== currentUser) {
-      fetchRepos(user?.login);
+      fetchRepos(user?.login || '');
     }
     prevUserRef.current = currentUser;
   }, [user]);

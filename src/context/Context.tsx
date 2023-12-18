@@ -7,13 +7,13 @@ interface UserContextType {
   updateUser: (user: UserI) => void;
 }
 
-const initialState = {
+const initialState: Partial<UserI> = {
   avatar_url: '', followers : 0, following : 0, location : '', name : '', bio : ''
 }
 const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider = ({children}: {children: ReactNode}) => {
-  const [user, setUser] = useState<Partial<UserI>>(initialState);
+  const [user, setUser] = useState(initialState);
 
   const updateUser = (user: UserI) => {
     return setUser(user);

@@ -27,7 +27,7 @@ const UserCard = ({ user, loading, onPress }: Props) => {
   }
   return (
     <div className={styles["search-card"]} onClick={() => onPress(user)}>
-      <Image src={user.avatar_url} alt="logo" width={80} height={80} />
+      <Image src={user.avatar_url || ''} alt="logo" width={80} height={80} />
       <div className={styles["search-card-info"]}>
         <h2>{user.name}</h2>
         <p>{user.bio}</p>
