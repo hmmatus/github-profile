@@ -6,7 +6,7 @@ type Props = {
 const InformationTag = ({label, value}: Props) => {
   return (
     <div className={styles.container}>
-      <h5 className={styles.label}>{label}</h5>
+      <h3 className={styles.label}>{label}</h3>
       <div className={styles.separator}></div>
       <p className={styles.value}>{value}</p>
     </div>

@@ -3,10 +3,15 @@
 .container {
   display: flex;
   align-items: center;
-  height: 50px;
+  height: min(50px, 5em);
   border-radius: 8px;
   background-color: $card-background;
-  padding: 4px;
+  padding: 8px;
+  margin: 8px 0;
+
+  @media (min-width: 720px) {
+    margin: 0 8px;
+  }
 }
 
 .separator {
@@ -18,9 +23,12 @@
 .label {
   color: $text-secondary;
   @extend .body-text;
+  padding: 12px;
 }
 
 .value {
+  white-space: nowrap;
   color: $text-primary;
-  @extend .small-text;
+  @extend .body-text;
+  padding: 12px;
 }
