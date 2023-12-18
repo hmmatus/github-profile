@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Be_Vietnam_Pro } from 'next/font/google'
 import './globals.scss'
 
-const inter = Be_Vietnam_Pro({ subsets: ['latin'], weight: '400' })
+const inter = Be_Vietnam_Pro({ subsets: ['latin'], weight: '500' })
 
 export const metadata: Metadata = {
   title: 'Github Profile Challenge',

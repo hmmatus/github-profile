@@ -1,0 +1,32 @@
+@import "colors";
+@import "base";
+.search-card {
+  display: flex;
+  width: 100%;
+  background-color: $secondary-background;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 8px;
+  z-index: 2;
+  @media (min-width: 1024px) {
+    height: min(100px, 15vh);
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  .search-card-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 8px 0px 0px 8px;
+    h2 {
+      margin: 8px 0px;
+      @extend .title-text;
+    }
+    p {
+      margin: 0px;
+      @extend .body-text;
+      color: $text-secondary;
+    }
+  }
+}
