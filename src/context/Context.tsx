@@ -3,13 +3,17 @@ import { UserI } from '@/models/user.model';
 import React, { ReactNode, createContext, useContext, useState } from 'react';
 
 interface UserContextType {
-  user: UserI | null;
+  user: UserI;
   updateUser: (user: UserI) => void;
+}
+
+const initialState = {
+  avatar_url: '', followers : 0, following : 0, location : '', name : '', bio : ''
 }
 const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider = ({children}: {children: ReactNode}) => {
-  const [user, setUser] = useState<UserI | null>(null);
+  const [user, setUser] = useState<Partial<UserI>>(initialState);
 
   const updateUser = (user: UserI) => {
     return setUser(user);

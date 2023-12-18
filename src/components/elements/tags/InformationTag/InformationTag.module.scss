@@ -27,6 +27,7 @@
 }
 
 .value {
+  white-space: nowrap;
   color: $text-primary;
   @extend .body-text;
   padding: 12px;

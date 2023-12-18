@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import CustomInput from "@/components/elements/inputs/CustomInput/CustomInput";
 import styles from "./HomeLayout.module.scss";
 import InformationTag from "@/components/elements/tags/InformationTag/InformationTag";
@@ -12,14 +12,12 @@ import Image from "next/image";
 import { useUserContext } from "@/context/Context";
 
 const HomeLayout = () => {
-  const [searchValue, setSearchValue] = useState("");
   const [repos, setRepos] = useState<RepoI[] | []>([]);
   const [selectedRepos, setSelectedRepos] = useState<RepoI[] | []>([]);
   const [showAll, setShowAll] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const {user, updateUser} = useUserContext();
-
+  const [loading, setLoading] = useState(true);
+  const { user, updateUser } = useUserContext();
+  const prevUserRef = useRef<UserI | null>(null);
 
   async function fetchProfile(name: string) {
     try {
@@ -66,16 +64,31 @@ const HomeLayout = () => {
   }, []);
 
   useEffect(() => {
-    fetchRepos(`${user?.login}`);
-  }, [user])
+    const currentUser = user;
+    const prevUser = prevUserRef.current;
+    if (prevUser !== currentUser) {
+      fetchRepos(user?.login);
+    }
+    prevUserRef.current = currentUser;
+  }, [user]);
 
   if (loading) {
     return <HomeSkeleton />;
   }
 
-  const { avatar_url, followers, following, location, name, bio } =
-    user as UserI;
-    
+  const {
+    avatar_url = "",
+    followers = 0,
+    following = 0,
+    location = "",
+    name = "",
+    bio = "",
+  } = user as UserI;
+
+  if (loading) {
+    return <HomeSkeleton />;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles["body"]}>
@@ -108,6 +121,11 @@ const HomeLayout = () => {
               onClick={() => handleOpenNav(elto.html_url)}
             />
           ))}
+        </section>
+        <section>
+          <p onClick={handleSeeAll} className={styles["footer-text"]}>{`${
+            showAll ? "View less Repositories" : "View all repositories"
+          }`}</p>
         </section>
       </div>
     </div>
